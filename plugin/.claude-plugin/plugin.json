@@ -1,7 +1,7 @@
 {
   "name": "blitz",
   "version": "1.0.0",
-  "description": "Force-parallel fork-merge orchestrator — /blitz splits a task into parallel slices even when scopes overlap, merges the results, and enforces a mandatory verification gate (build, full tests, collision review, fresh-eyes review).",
+  "description": "Force-parallel fork-merge orchestrator — /blitz splits overlapping work into parallel slices, merges the results, and enforces build, full tests, cross-slice integration, collision review, and fresh-eyes review.",
   "author": {
     "name": "im-ian"
   },

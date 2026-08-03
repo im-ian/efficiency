@@ -7,7 +7,7 @@ Agents often decline to parallelize code work — "the scopes overlap", "these t
 ```
        ┌─ slice A ─┐
 task ──┼─ slice B ─┼──▶ merge ──▶ verification gate ──▶ done
-       └─ slice C ─┘    (취합)     (build · tests · review)
+       └─ slice C ─┘    (취합)     (build · tests · integration · review)
  (선작업: shared contract first)
 ```
 
@@ -18,10 +18,10 @@ blitz is a **speed-first** strategy. It deliberately accepts textual and semanti
 | phase | what happens |
 |-------|--------------|
 | **Slice** | 2–6 slices by deliverable, overlapping files allowed; collision zones declared up front |
-| **Contract (선작업)** | ≤10% of effort pinning shared interfaces, stubs, and naming so slices diverge less |
-| **Fan-out** | all slices run concurrently, no mid-flight coordination — stub and keep going |
+| **Contract (선작업)** | ≤10% of effort pinning shared interfaces, validation, ownership, composition order, and naming so slices diverge less |
+| **Fan-out** | slices run concurrently in isolated worktrees/copies from one contract baseline; runnerless fallback preserves separate patches back-to-back |
 | **Merge (취합)** | one merger resolves textual conflicts by intent and hunts semantic ones (duplicate helpers, double registration, divergent naming) |
-| **Gate** | build + full test suite + line-by-line collision review + fresh-eyes review of the merged diff. Loop until green. **Never skipped.** |
+| **Gate** | build + full test suite + cross-slice integration checks + line-by-line collision review + fresh-eyes review of the merged diff. Loop until green. **Never skipped.** |
 
 A blitz run that skips the gate is a failed run, however fast it finished.
 

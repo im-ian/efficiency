@@ -30,18 +30,25 @@ Output a table: `id | deliverable | files likely touched | collides-with`.
 
 ## 2. Contract (선작업)
 
-Before fan-out, spend at most ~10% of the total effort pinning the shared surface so slices diverge less:
+Before fan-out, spend at most ~10% of the total effort pinning the shared surface so slices diverge less. Pin behavior as well as syntax wherever slices share state:
 
 - shared types / interfaces / function signatures that two or more slices will call or implement
 - file skeletons or stub exports for anything two slices depend on
 - naming decisions (route names, translation keys, env vars, CSS variables)
+- validation and error policy for shared inputs, including unknown or wrong-typed values
+- ownership and mutability rules for shared state and returned values
+- composition order when slice behaviors combine (for example: filter, then sort)
+- user-visible representation when multiple slices affect the same output
 
-Write the contract into the repo — compiling stubs beat prose. Every slice prompt embeds the contract verbatim. If genuinely nothing is shared: `CONTRACT: none`.
+For every predicted collision, record at least one cross-slice acceptance example or invariant that can become an integration test during merge. Write the contract into the repo — compiling stubs beat prose. Every slice prompt embeds the contract verbatim. If genuinely nothing is shared: `CONTRACT: none`.
+
+Create one immutable contract baseline before fan-out. In git, use a dedicated integration branch and commit only the task-relevant starting state plus contract artifacts; never sweep unrelated user changes into that commit. Every slice branch / worktree starts from that exact commit. If a commit is not allowed, export an equivalent immutable snapshot or patch set and initialize every slice from it.
 
 ## 3. Fan-out
 
-- Run ALL slices concurrently. With subagents + worktree isolation available: one agent per slice, each in its own worktree. Without worktrees: one agent per slice anyway — overlapping edits are expected and resolved in step 4. Never serialize to avoid them.
-- No orchestration runner available at all → execute the slices yourself back-to-back, each with only its own prompt + contract as context, and STILL run steps 4–5 in full. Blitz degraded is still blitz, not abandoned.
+- Run ALL slices concurrently when isolated execution is available. With subagents + git worktrees: one agent per slice, each worktree branched from the contract baseline. Without worktrees, use a separate temporary repo copy or patch-producing environment per slice. Never let overlapping slices concurrently edit one shared checkout because results can be overwritten before merge.
+- Each slice returns an independent commit hash or patch. The merger consumes these artifacts; it never relies on whichever edits happen to remain in a shared working tree.
+- If no isolation primitive or orchestration runner exists, execute slices back-to-back yourself, each with only its own prompt + contract as context. Save a patch after each before restoring the baseline, then run steps 4–5 in full. Blitz degraded is still blitz, not abandoned.
 - Slices do not talk to each other. A mid-flight "I need X from slice B" means: stub X per the contract and keep going; the merge fixes it.
 - Log per slice: `RUN: <id> → ok|fail — <one line>`. A failed slice never blocks the others; note it, merge what succeeded, and surface the failure in the final report.
 
@@ -50,8 +57,10 @@ Write the contract into the repo — compiling stubs beat prose. Every slice pro
 One merger — you — never parallel. Merge order: contract-owning slices first, then dependents.
 
 - Textual conflicts (same lines edited twice): resolve by intent, not by blindly picking a side. Both intents usually survive.
-- Semantic conflicts — the dangerous ones no diff tool flags. Actively hunt for: the same helper written twice, divergent names for one concept, double registration (routes, providers, event listeners), incompatible assumptions about shared state, dead stubs left over from step 2.
+- Semantic conflicts — the dangerous ones no diff tool flags. Actively hunt for: the same helper written twice, divergent names for one concept, double registration (routes, providers, event listeners), incompatible validation or error behavior, leaked live state / ownership violations, operation-order assumptions, one feature hidden from shared output, and dead stubs left over from step 2.
 - Unify duplicates into one implementation; delete the loser.
+- Turn the contract's cross-slice examples into integration tests. Slice-local tests being green does not prove the merged behavior.
+- Keep the pre-fan-out contract authoritative. Never make the gate green by silently expanding / narrowing behavior or weakening a correct assertion merely to match the implementation. If a slice assertion contradicts the contract, correct it and log that resolution. If the contract is ambiguous, preserve compatible baseline and slice-visible behavior; report broader design improvements separately.
 - Log every resolution: `CONFLICT: <file> [<slice-ids>] → <one-line resolution>`.
 
 ## 5. Verification gate — NON-NEGOTIABLE
@@ -60,9 +69,10 @@ Steps 3–4 bought speed on credit; this is where it gets paid.
 
 1. Build / typecheck / lint — must be green.
 2. Full test suite — not just tests near the touched code. Green, or each failure explicitly explained and fixed.
-3. Collision review: every file written by ≥2 slices gets a line-by-line read.
-4. Fresh-eyes review: a reviewer that wrote NO slice (a separate agent, or you in a deliberately separate pass) reads the full merged diff for semantic conflicts, with the slice table and conflict log as input.
-5. Anything found → fix → re-run the gate. Loop until clean.
+3. Cross-slice integration checks: exercise combined behaviors and the contract invariants, not only each slice in isolation.
+4. Collision review: every file written by ≥2 slices gets a line-by-line read.
+5. Fresh-eyes review: a reviewer that wrote NO slice (a separate agent, or you in a deliberately separate pass) reads the full merged diff for semantic conflicts, with the slice table and conflict log as input.
+6. Any failing check, dropped slice intent, in-scope regression, or semantic merge defect → fix → re-run the gate. Record only genuine enhancements outside the task as follow-up findings, not silent scope expansion. Loop until clean.
 
 Report failures honestly. "Tests fail but it's probably fine" does not exist in blitz.
 
@@ -72,7 +82,7 @@ Report failures honestly. "Tests fail but it's probably fine" does not exist in 
 BLITZ REPORT
 slices: <ok>/<total> ok
 conflicts: <count> — <files>
-gate: build ✓ tests ✓ collision-review ✓ fresh-eyes ✓
+gate: build ✓ tests ✓ integration ✓ collision-review ✓ fresh-eyes ✓
 ```
 
 followed by `FINAL:` and the outcome. If the gate never went green, the report says `gate: RED` plus exactly what remains — never a silent downgrade to "done".
@@ -95,14 +105,14 @@ RUN: dark-mode → ok — palette + toggle, wrapped root in ThemeProvider
 RUN: i18n → ok — t() across components, wrapped root in I18nProvider
 CONFLICT: src/App.tsx [dark-mode, i18n] → both wrapped root independently; rewired both through AppProviders
 CONFLICT: src/components/Button.tsx [dark-mode, i18n] → merged className change + t() wrapping; both intents kept
-gate: build ✓ tests ✓ collision-review ✓ fresh-eyes → found ThemeProvider mounted twice (App + AppProviders) → fixed → re-gate ✓
+gate: build ✓ tests ✓ integration ✓ collision-review ✓ fresh-eyes → found ThemeProvider mounted twice (App + AppProviders) → fixed → re-gate ✓
 ```
 
 ```
 BLITZ REPORT
 slices: 2/2 ok
 conflicts: 2 — App.tsx, Button.tsx
-gate: build ✓ tests ✓ collision-review ✓ fresh-eyes ✓
+gate: build ✓ tests ✓ integration ✓ collision-review ✓ fresh-eyes ✓
 ```
 
 FINAL: dark mode + i18n merged and verified.
