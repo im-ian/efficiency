@@ -1,0 +1,20 @@
+{
+  "name": "blitz",
+  "version": "1.0.0",
+  "description": "Force-parallel fork-merge orchestrator — /blitz splits a task into parallel slices even when scopes overlap, merges the results, and enforces a mandatory verification gate (build, full tests, collision review, fresh-eyes review).",
+  "author": {
+    "name": "im-ian"
+  },
+  "homepage": "https://github.com/im-ian/blitz-skills",
+  "repository": "https://github.com/im-ian/blitz-skills.git",
+  "license": "MIT",
+  "keywords": [
+    "parallel",
+    "fork-merge",
+    "orchestration",
+    "multi-agent",
+    "speed",
+    "claude-code",
+    "codex"
+  ]
+}

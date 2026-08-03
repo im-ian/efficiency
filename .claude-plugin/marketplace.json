@@ -1,0 +1,34 @@
+{
+  "name": "blitz",
+  "owner": {
+    "name": "im-ian"
+  },
+  "metadata": {
+    "description": "Force-parallel fork-merge orchestrator skill for Claude Code (/blitz) and Codex ($blitz) — parallelize even when scopes overlap, merge the results, then pay for the speed with a mandatory verification gate."
+  },
+  "plugins": [
+    {
+      "name": "blitz",
+      "source": "./plugin",
+      "description": "Force-parallel fork-merge orchestrator — /blitz splits a task into parallel slices even when scopes overlap, merges the results, and enforces a mandatory verification gate (build, full tests, collision review, fresh-eyes review).",
+      "version": "1.0.0",
+      "author": {
+        "name": "im-ian"
+      },
+      "homepage": "https://github.com/im-ian/blitz-skills",
+      "repository": "https://github.com/im-ian/blitz-skills.git",
+      "license": "MIT",
+      "keywords": [
+        "parallel",
+        "fork-merge",
+        "orchestration",
+        "multi-agent",
+        "speed",
+        "claude-code",
+        "codex"
+      ],
+      "category": "workflow",
+      "strict": false
+    }
+  ]
+}
