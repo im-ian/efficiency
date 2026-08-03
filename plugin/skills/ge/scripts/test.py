@@ -37,8 +37,10 @@ def validate(g):
         outgoing[e["from"]] += 1
 
     for i in g["entry"]:
+        assert i in nodes, f"entry {i} is not a node"
         assert incoming[i] == 0, f"entry {i} has incoming edges"
     for i in g["exit"]:
+        assert i in nodes, f"exit {i} is not a node"
         assert outgoing[i] == 0, f"exit {i} has outgoing edges"
 
     # Kahn: DAG check

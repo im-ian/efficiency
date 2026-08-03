@@ -11,12 +11,12 @@
       "name": "ge",
       "source": "./plugin",
       "description": "Graph-engineering orchestrator — /ge decomposes a task into a work graph (DAG) of agent/validator/merge/human nodes with context isolation, retry gates, and run logs.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "im-ian"
       },
       "homepage": "https://github.com/im-ian/graph-engineering",
-      "repository": "https://github.com/im-ian/graph-engineering",
+      "repository": "https://github.com/im-ian/graph-engineering.git",
       "license": "MIT",
       "keywords": [
         "graph-engineering",

@@ -27,7 +27,7 @@
 
 ```bash
 codex plugin marketplace add im-ian/graph-engineering
-codex plugin add ge
+codex plugin add ge@graph-engineering
 ```
 
 ### 방법 2 — 수동 symlink

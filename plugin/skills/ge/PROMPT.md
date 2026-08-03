@@ -44,7 +44,7 @@ Output the graph as a fenced ```json block with exactly this shape:
 }
 ```
 
-Validator nodes additionally require: `"on_fail": { "retry": <max attempts>, "then": "<node-id to escalate to, or 'abort'>" }`.
+Validator nodes additionally require: `"on_fail": { "retry": <max attempts>, "then": "<node-id to escalate to, or 'abort'>" }`. If `then` names a node (typically a human), also draw the escalation edge explicitly: `{ "from": "<validator>", "to": "<that node>", "carries": [...], "when": "fail" }` — `then: "abort"` needs no edge.
 
 Hard rules:
 

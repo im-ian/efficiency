@@ -1,6 +1,6 @@
 {
   "name": "ge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Graph-engineering orchestrator — /ge decomposes a task into a work graph (DAG) of agent/validator/merge/human nodes with context isolation, retry gates, and run logs.",
   "author": {
     "name": "im-ian"
