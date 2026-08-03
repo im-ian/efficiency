@@ -6,23 +6,41 @@
 
 | 파일 | 역할 |
 |---|---|
-| `PROMPT.md` | 핵심 프롬프트 (단일 소스). 그래프 스펙 계약 + 실행 프로토콜 |
-| `SKILL.md` | Claude Code / Codex 공용 스킬 래퍼 (PROMPT.md 를 읽어 적용) |
-| `scripts/test.py` | 그래프 JSON 검증기 (스키마·DAG·artifact 전달·entry/exit 체크) |
+| `plugin/skills/ge/PROMPT.md` | 핵심 프롬프트 (단일 소스). 그래프 스펙 계약 + 실행 프로토콜 |
+| `plugin/skills/ge/SKILL.md` | Claude Code / Codex 공용 스킬 래퍼 (PROMPT.md 를 읽어 적용) |
+| `plugin/skills/ge/scripts/test.py` | 그래프 JSON 검증기 (스키마·DAG·artifact 전달·entry/exit 체크) |
+| `.claude-plugin/marketplace.json` | 플러그인 마켓플레이스 매니페스트 (Claude Code / Codex 공용) |
+| `plugin/.claude-plugin/plugin.json` | `ge` 플러그인 매니페스트 |
 
 ## 설치
 
-이 폴더를 양쪽 스킬 디렉토리에 symlink 하면 끝. 원본 하나만 수정하면 양쪽에 반영됩니다.
+### 방법 1 — 플러그인 마켓플레이스 (권장)
+
+**Claude Code** (→ `/ge`) — 세션 안에서:
+
+```
+/plugin marketplace add im-ian/graph-engineering
+/plugin install ge@graph-engineering
+```
+
+**Codex** (→ `$ge`) — 터미널에서:
+
+```bash
+codex plugin marketplace add im-ian/graph-engineering
+codex plugin add ge
+```
+
+### 방법 2 — 수동 symlink
 
 ```bash
 git clone https://github.com/im-ian/graph-engineering.git
 cd graph-engineering
 
 # Claude Code → /ge
-ln -s "$PWD" ~/.claude/skills/ge
+ln -s "$PWD/plugin/skills/ge" ~/.claude/skills/ge
 
 # Codex → $ge
-ln -s "$PWD" ~/.codex/skills/ge
+ln -s "$PWD/plugin/skills/ge" ~/.codex/skills/ge
 ```
 
 설치 후 **새 세션**에서 스킬이 인식됩니다.
@@ -46,7 +64,7 @@ $ge 경쟁사 5곳 리서치하고, IA 설계해서 내 승인 받은 뒤, SEO �
 에이전트가 출력한 그래프 JSON 을 직접 검증하려면:
 
 ```bash
-python3 scripts/test.py graph.json    # 또는 에이전트 출력 전체를 stdin 으로 파이프
+python3 plugin/skills/ge/scripts/test.py graph.json    # 또는 에이전트 출력 전체를 stdin 으로 파이프
 ```
 
 체크 항목: 노드 id 중복, 노드 타입, validator 의 `on_fail`, 엣지가 실어 나르는 artifact 가 from-노드 outputs 에 존재하는지, entry/exit 정합성, 사이클(DAG) 여부.

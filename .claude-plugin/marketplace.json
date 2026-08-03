@@ -1,0 +1,33 @@
+{
+  "name": "graph-engineering",
+  "owner": {
+    "name": "im-ian"
+  },
+  "metadata": {
+    "description": "Graph-engineering orchestrator skill for Claude Code (/ge) and Codex ($ge) — decompose a task into a work graph of agent/validator/merge/human nodes and manage its execution."
+  },
+  "plugins": [
+    {
+      "name": "ge",
+      "source": "./plugin",
+      "description": "Graph-engineering orchestrator — /ge decomposes a task into a work graph (DAG) of agent/validator/merge/human nodes with context isolation, retry gates, and run logs.",
+      "version": "1.0.0",
+      "author": {
+        "name": "im-ian"
+      },
+      "homepage": "https://github.com/im-ian/graph-engineering",
+      "repository": "https://github.com/im-ian/graph-engineering",
+      "license": "MIT",
+      "keywords": [
+        "graph-engineering",
+        "orchestration",
+        "multi-agent",
+        "workflow",
+        "claude-code",
+        "codex"
+      ],
+      "category": "workflow",
+      "strict": false
+    }
+  ]
+}
