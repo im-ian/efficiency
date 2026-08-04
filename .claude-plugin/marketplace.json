@@ -1,28 +1,29 @@
 {
-  "name": "graph-engineering",
+  "name": "efficiency",
   "owner": {
     "name": "im-ian"
   },
   "metadata": {
-    "description": "Graph-engineering orchestrator skill for Claude Code (/ge) and Codex ($ge) — decompose a task into a work graph of agent/validator/merge/human nodes and manage its execution."
+    "description": "A growing collection of focused agent workflows for doing complex work faster without weakening verification."
   },
   "plugins": [
     {
-      "name": "ge",
-      "source": "./plugin",
-      "description": "Graph-engineering orchestrator — /ge decomposes a task into a work graph (DAG) of agent/validator/merge/human nodes with context isolation, retry gates, and run logs.",
-      "version": "1.0.1",
+      "name": "eff",
+      "source": "./plugins/eff",
+      "description": "Independent graph and blitz orchestration skills under the eff namespace for Claude Code and Codex.",
+      "version": "1.0.0",
       "author": {
         "name": "im-ian"
       },
-      "homepage": "https://github.com/im-ian/graph-engineering",
-      "repository": "https://github.com/im-ian/graph-engineering.git",
+      "homepage": "https://github.com/im-ian/efficiency",
+      "repository": "https://github.com/im-ian/efficiency.git",
       "license": "MIT",
       "keywords": [
-        "graph-engineering",
+        "efficiency",
         "orchestration",
         "multi-agent",
-        "workflow",
+        "graph-engineering",
+        "parallel",
         "claude-code",
         "codex"
       ],

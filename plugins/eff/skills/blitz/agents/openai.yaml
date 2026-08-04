@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Blitz"
+  short_description: "Force parallel work, merge it, and verify the result"
+  default_prompt: "Use $eff:blitz to parallelize this work and merge it safely."

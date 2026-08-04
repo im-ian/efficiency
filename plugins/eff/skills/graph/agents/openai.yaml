@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Graph"
+  short_description: "Design and run validated multi-agent work graphs"
+  default_prompt: "Use $eff:graph to orchestrate this task as a validated work graph."

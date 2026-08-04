@@ -1,0 +1,38 @@
+{
+  "name": "eff",
+  "version": "1.0.0",
+  "description": "Independent graph and blitz orchestration skills under the eff namespace for Claude Code and Codex.",
+  "author": {
+    "name": "im-ian",
+    "url": "https://github.com/im-ian"
+  },
+  "homepage": "https://github.com/im-ian/efficiency",
+  "repository": "https://github.com/im-ian/efficiency",
+  "license": "MIT",
+  "keywords": [
+    "efficiency",
+    "orchestration",
+    "multi-agent",
+    "graph-engineering",
+    "parallel",
+    "claude-code",
+    "codex"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Efficiency",
+    "shortDescription": "Focused workflows for faster, verified agent work",
+    "longDescription": "Use independent graph and blitz orchestration skills from one installation. Graph selects and executes validated work graphs; Blitz forces overlapping work into isolated parallel slices, merges the results, and enforces a verification gate.",
+    "developerName": "im-ian",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/im-ian/efficiency",
+    "defaultPrompt": [
+      "Use $eff:graph to orchestrate this as a validated work graph.",
+      "Use $eff:blitz to parallelize this work and merge it safely."
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "eff",
+  "version": "1.0.0",
+  "description": "Independent graph and blitz orchestration skills under the eff namespace for Claude Code and Codex.",
+  "author": {
+    "name": "im-ian"
+  },
+  "homepage": "https://github.com/im-ian/efficiency",
+  "repository": "https://github.com/im-ian/efficiency.git",
+  "license": "MIT",
+  "keywords": [
+    "efficiency",
+    "orchestration",
+    "multi-agent",
+    "graph-engineering",
+    "parallel",
+    "claude-code",
+    "codex"
+  ]
+}
