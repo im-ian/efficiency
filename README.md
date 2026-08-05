@@ -1,29 +1,31 @@
 # Efficiency
 
-Focused agent workflows for doing complex work faster without weakening verification. One `eff` plugin installs independent skills for Claude Code and Codex.
+**한국어** | [English](README.en.md)
 
-## Skills
+검증을 약화시키지 않으면서 복잡한 작업을 더 빠르게 처리하는 에이전트 워크플로 모음. `eff` 플러그인 하나로 Claude Code 와 Codex 에 독립 스킬들을 설치합니다.
 
-| Skill | Purpose |
+## 스킬
+
+| 스킬 | 용도 |
 | --- | --- |
-| `eff:graph` | Decide between prompt, loop, and graph execution; when a graph is warranted, orchestrate a validated DAG of agent, validator, merge, and human nodes. |
-| `eff:blitz` | Force overlapping work into isolated parallel slices, merge by intent, and pass a mandatory verification gate. |
-| `eff:toss` | Hand the current work-in-progress to a background subagent and stay free for anything else; close out with elapsed time, token usage, and a work summary. |
+| `eff:graph` | 프롬프트 / 루프 / 그래프 실행 중 적합한 방식을 판단하고, 그래프가 필요할 때 에이전트·검증·머지·휴먼 노드로 구성된 검증된 DAG 를 오케스트레이션. |
+| `eff:blitz` | 겹치는 작업을 격리된 병렬 슬라이스로 강제 분할하고, 의도 기준으로 머지한 뒤, 필수 검증 게이트를 통과. |
+| `eff:toss` | 현재 진행 중인 작업을 백그라운드 서브 에이전트에게 넘기고 메인 세션은 즉시 다른 작업 가능; 종료 시 소요 시간·토큰·작업 요약 리포트. |
 
-The skills share an installation namespace but keep separate prompts, triggers, and operating contracts.
+스킬들은 설치 네임스페이스만 공유하고 프롬프트, 트리거, 동작 계약은 각각 독립적입니다.
 
-## Install
+## 설치
 
 ### Claude Code
 
-Run in a Claude Code session:
+Claude Code 세션에서 실행:
 
 ```text
 /plugin marketplace add im-ian/efficiency
 /plugin install eff@efficiency
 ```
 
-Then invoke:
+호출:
 
 ```text
 /eff:graph <task>
@@ -33,14 +35,14 @@ Then invoke:
 
 ### Codex
 
-Run in a terminal:
+터미널에서 실행:
 
 ```bash
 codex plugin marketplace add im-ian/efficiency
 codex plugin add eff@efficiency
 ```
 
-Start a new session, then invoke:
+새 세션 시작 후 호출:
 
 ```text
 $eff:graph <task>
@@ -48,21 +50,21 @@ $eff:blitz <task>
 $eff:toss <task>
 ```
 
-## Repository structure
+## 저장소 구조
 
 ```text
-.claude-plugin/marketplace.json   # Claude Code marketplace
-.agents/plugins/marketplace.json # Codex marketplace
-plugins/eff/                     # Shared plugin package
+.claude-plugin/marketplace.json   # Claude Code 마켓플레이스
+.agents/plugins/marketplace.json # Codex 마켓플레이스
+plugins/eff/                     # 공유 플러그인 패키지
 └── skills/
     ├── graph/
     ├── blitz/
     └── toss/
 ```
 
-## Development
+## 개발
 
-Validate the package before publishing:
+배포 전 패키지 검증:
 
 ```bash
 claude plugin validate .
@@ -72,6 +74,6 @@ uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_
 uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/eff/skills/toss
 ```
 
-## License
+## 라이선스
 
 MIT
