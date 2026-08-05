@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Update Skills"
+  short_description: "Preview and apply latest versions of installed skills"
+  default_prompt: "Use $eff:update-skills to check installed skills for updates and apply the ones I confirm."
