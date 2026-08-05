@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Dedupe Skills"
+  short_description: "Find overlapping skills and remove the redundant ones"
+  default_prompt: "Use $eff:dedupe-skills to find overlapping or conflicting skills and help me remove the redundant ones."
