@@ -58,30 +58,6 @@ $eff:blitz <task>
 $eff:toss <task>
 ```
 
-## Repository structure
-
-```text
-.claude-plugin/marketplace.json   # Claude Code marketplace
-.agents/plugins/marketplace.json # Codex marketplace
-plugins/eff/                     # Shared plugin package
-└── skills/
-    ├── graph/
-    ├── blitz/
-    └── toss/
-```
-
-## Development
-
-Validate the package before publishing:
-
-```bash
-claude plugin validate .
-uv run --with pyyaml python ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py plugins/eff
-uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/eff/skills/graph
-uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/eff/skills/blitz
-uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/eff/skills/toss
-```
-
 ## License
 
 MIT

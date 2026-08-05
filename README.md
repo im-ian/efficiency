@@ -58,30 +58,6 @@ $eff:blitz <task>
 $eff:toss <task>
 ```
 
-## 저장소 구조
-
-```text
-.claude-plugin/marketplace.json   # Claude Code 마켓플레이스
-.agents/plugins/marketplace.json # Codex 마켓플레이스
-plugins/eff/                     # 공유 플러그인 패키지
-└── skills/
-    ├── graph/
-    ├── blitz/
-    └── toss/
-```
-
-## 개발
-
-배포 전 패키지 검증:
-
-```bash
-claude plugin validate .
-uv run --with pyyaml python ~/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py plugins/eff
-uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/eff/skills/graph
-uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/eff/skills/blitz
-uv run --with pyyaml python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py plugins/eff/skills/toss
-```
-
 ## 라이선스
 
 MIT
