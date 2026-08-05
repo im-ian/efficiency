@@ -4,6 +4,14 @@
 
 Focused agent workflows for doing complex work faster without weakening verification. One `eff` plugin installs independent skills for Claude Code and Codex.
 
+## Why these exist
+
+Not a feature list someone imagined. Each skill hardened a friction point hit repeatedly during daily agent work.
+
+- **`graph`** — Improvising the breakdown of a large task every time meant verification steps got dropped and ordering drifted. This pins the structure before execution starts.
+- **`blitz`** — "These files overlap, so this can't be parallelized" came up far too often. Overlap is a merge problem, not a parallelization blocker: fork first, merge later, then prove it with a gate.
+- **`toss`** — One long-running task shouldn't hold the whole session hostage. Hand it to a background agent and keep the main thread working.
+
 ## Skills
 
 | Skill | Purpose |
