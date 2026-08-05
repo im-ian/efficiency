@@ -1,7 +1,7 @@
 {
   "name": "eff",
-  "version": "1.1.0",
-  "description": "Independent graph, blitz, and toss orchestration skills under the eff namespace for Claude Code and Codex.",
+  "version": "1.2.0",
+  "description": "Independent orchestration (graph, blitz, toss) and skill-maintenance (update-skills, dedupe-skills, prune-skills) skills under the eff namespace for Claude Code and Codex.",
   "author": {
     "name": "im-ian",
     "url": "https://github.com/im-ian"
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "Efficiency",
     "shortDescription": "Focused workflows for faster, verified agent work",
-    "longDescription": "Use independent graph, blitz, and toss orchestration skills from one installation. Graph selects and executes validated work graphs; Blitz forces overlapping work into isolated parallel slices, merges the results, and enforces a verification gate; Toss hands work-in-progress to a background agent and closes it out with time, tokens, and a summary.",
+    "longDescription": "Use independent orchestration and skill-maintenance skills from one installation. Graph selects and executes validated work graphs; Blitz forces overlapping work into isolated parallel slices, merges the results, and enforces a verification gate; Toss hands work-in-progress to a background agent and closes it out with time, tokens, and a summary; Update Skills previews and applies latest versions of installed skills; Dedupe Skills finds overlapping skills and removes redundancy; Prune Skills removes never-used skills based on real usage data.",
     "developerName": "im-ian",
     "category": "Productivity",
     "capabilities": [
@@ -33,7 +33,10 @@
     "defaultPrompt": [
       "Use $eff:graph to orchestrate this as a validated work graph.",
       "Use $eff:blitz to parallelize this work and merge it safely.",
-      "Use $eff:toss to hand this work to a background agent and keep the session free."
+      "Use $eff:toss to hand this work to a background agent and keep the session free.",
+      "Use $eff:update-skills to check installed skills for updates and apply the ones I confirm.",
+      "Use $eff:dedupe-skills to find overlapping or conflicting skills and help me remove the redundant ones.",
+      "Use $eff:prune-skills to measure which skills I actually use and help me remove the dead weight."
     ]
   }
 }
