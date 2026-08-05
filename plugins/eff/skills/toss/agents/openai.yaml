@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Toss"
+  short_description: "Hand work to a background agent and stay free"
+  default_prompt: "Use $eff:toss to hand this work to a background agent and keep the session free."
