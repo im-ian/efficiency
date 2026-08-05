@@ -2,18 +2,7 @@
 
 [한국어](README.md) | **English**
 
-Focused agent workflows for doing complex work faster without weakening verification. One `eff` plugin installs independent skills for Claude Code and Codex.
-
-## Why these exist
-
-Not a feature list someone imagined. Each skill hardened a friction point hit repeatedly during daily agent work.
-
-- **`graph`** — Improvising the breakdown of a large task every time meant verification steps got dropped and ordering drifted. This pins the structure before execution starts.
-- **`blitz`** — "These files overlap, so this can't be parallelized" came up far too often. Overlap is a merge problem, not a parallelization blocker: fork first, merge later, then prove it with a gate.
-- **`toss`** — One long-running task shouldn't hold the whole session hostage. Hand it to a background agent and keep the main thread working.
-- **`update-skills`** — Installed skills quietly went stale because nothing surfaced when updates shipped. Preview version, changelog, and token delta in a table, then update only what's confirmed.
-- **`dedupe-skills`** — Accumulated skills started stealing each other's triggers and pushing contradictory instructions. Find the overlap with quoted evidence and help clean it up.
-- **`prune-skills`** — Install-and-forget skills were burning always-on tokens every session. Measure real usage from transcripts and cull the dead weight.
+Focused agent workflows for doing complex work faster without weakening verification. Not a feature list someone imagined — each skill hardened a friction point hit repeatedly during daily agent work. One `eff` plugin installs independent skills for Claude Code and Codex.
 
 ## Skills
 
@@ -42,12 +31,7 @@ Run in a Claude Code session:
 Then invoke:
 
 ```text
-/eff:graph <task>
-/eff:blitz <task>
-/eff:toss <task>
-/eff:update-skills
-/eff:dedupe-skills
-/eff:prune-skills
+/eff:<skill> <task>    # e.g. /eff:graph <task>
 ```
 
 ### Codex
@@ -62,12 +46,7 @@ codex plugin add eff@efficiency
 Start a new session, then invoke:
 
 ```text
-$eff:graph <task>
-$eff:blitz <task>
-$eff:toss <task>
-$eff:update-skills
-$eff:dedupe-skills
-$eff:prune-skills
+$eff:<skill> <task>    # e.g. $eff:graph <task>
 ```
 
 ## License
