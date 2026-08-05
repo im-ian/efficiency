@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Prune Skills"
+  short_description: "Find never-used skills from real usage data and remove them"
+  default_prompt: "Use $eff:prune-skills to measure which skills I actually use and help me remove the dead weight."
