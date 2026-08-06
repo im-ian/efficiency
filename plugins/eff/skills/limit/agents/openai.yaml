@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Limit"
+  short_description: "Cap what a task may spend before it runs"
+  default_prompt: "Use $eff:limit to cap what this work may spend and stop before it overruns."
