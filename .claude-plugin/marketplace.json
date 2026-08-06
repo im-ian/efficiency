@@ -10,8 +10,8 @@
     {
       "name": "eff",
       "source": "./plugins/eff",
-      "description": "Independent orchestration (graph, blitz, toss) and skill-maintenance (update-skills, dedupe-skills, prune-skills) skills under the eff namespace for Claude Code and Codex.",
-      "version": "1.2.0",
+      "description": "Independent orchestration (graph, blitz, toss, race), review (crosscheck), spend control (limit), and skill-maintenance (update-skills, dedupe-skills, prune-skills) skills under the eff namespace for Claude Code and Codex.",
+      "version": "1.3.0",
       "author": {
         "name": "im-ian"
       },
