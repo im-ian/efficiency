@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Race"
+  short_description: "Race competing approaches, keep the judged winner"
+  default_prompt: "Use $eff:race to try competing approaches to this and keep the judged winner."
