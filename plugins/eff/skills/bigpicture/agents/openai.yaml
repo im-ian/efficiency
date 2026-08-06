@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Big Picture"
+  short_description: "Trace the whole flow, change where it belongs"
+  default_prompt: "Use $eff:bigpicture to trace the whole flow and land this change where it structurally belongs."

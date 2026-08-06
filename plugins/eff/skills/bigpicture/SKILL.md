@@ -1,0 +1,12 @@
+---
+name: bigpicture
+description: "Whole-flow structural change. Before editing anything it traces the full path, every caller, every duplicate of the same rule, and the contracts around them, then decides whether the change belongs where the symptom appeared or at the one place all paths cross — bounding the answer with evidence that exists today (rule of three, no interface with one implementation, no structure for an imagined future) and stopping for the user's approval before any diff grows past what was asked. Ships the requested work, structure commits separated from behavior commits, and proves the result with a test the narrow patch would have failed. Trigger on /eff:bigpicture or $eff:bigpicture, and on natural-language asks like: 'fix this properly, not just here', 'look at the whole flow before changing it', 'make this maintainable', 'is this the right place for this change', 'stop patching symptoms', 'this keeps breaking in new places', '전체 구조 보고 수정해줘', '땜질 말고 근본적으로 고쳐줘', '나중에 유지보수 되게 짜줘', '전체 흐름 확인하고 바꿔줘', '여기만 고치면 또 터질 것 같은데', '이 수정이 들어갈 자리가 여기가 맞나' — or whenever the fix that first comes to mind is a guard or special case sitting next to one that already exists. Keep this distinct from eff:crosscheck, which reviews an EXISTING change and ships nothing, and from eff:race, which builds competing implementations: bigpicture decides WHERE one change belongs and then lands it there."
+---
+
+Read `PROMPT.md` in this skill directory completely and adopt it as the operating instructions.
+
+Treat the text following the skill invocation as the work to be done; with no text, use the task currently in progress.
+
+Trace before editing — path, callers, duplicates, contracts, each cited with `file:line` — and never infer the flow from names. `local` is a legitimate and common verdict; this skill checks whether the structure is already right, it does not exist to prove it wrong. Every structural item must cite evidence that exists today: three real occurrences before extracting a shared unit, a live caller before an interface, a reported defect before touching anything the task did not name. Everything else is deferred and reported, never started. A diff larger than what the user asked for stops for approval before a single edit, and a user who chooses the local patch gets it built properly. Structure moves and behavior changes ship as separate commits. Never skip the verification gate, and always end with the `BIGPICTURE REPORT`.
+
+If the request contains `PLAN ONLY`, stop after presenting the options and edit nothing.
