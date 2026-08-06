@@ -1,0 +1,10 @@
+---
+name: crosscheck
+description: "Adversarial review debate. Spawns two fresh subagents that never saw the change being written — a challenger arguing it is broken and a defender arguing it is sound, both given the goal and constraints but NOT the author's rationale — runs them through a bounded two-round debate where every charge and every rebuttal must cite code, then adjudicates by running the disputed cases so the verdict comes from execution rather than from whoever argued better. Trigger on /eff:crosscheck or $eff:crosscheck, and on natural-language asks like: 'review this with fresh eyes', 'get a second opinion on this diff', 'have two agents argue about this', 'red team this change', 'check my own work', 'did I miss anything here', '이 변경 다른 시각으로 봐줘', '내가 짠 거 검증해줘', '찬반 붙여서 리뷰해줘', '두 명이 토론하듯 검토해줘', '놓친 거 없는지 교차 확인'. Keep this distinct from eff:race (competing IMPLEMENTATIONS, one survives) and from the fresh-eyes step inside an eff:blitz run (internal to that run): crosscheck argues over an EXISTING change and ships nothing but adjudicated findings."
+---
+
+Read `PROMPT.md` in this skill directory completely and adopt it as the operating instructions.
+
+Treat the text following the skill invocation as what to review; with no text, review the current uncommitted working diff.
+
+Both debaters are spawned read-only subagents — never argue both sides yourself and call that a cross-check. Neither side receives the author's rationale, prior conclusions, or suspicions; a debater told why the code is the way it is is no longer fresh. Roles are assigned but truth is not: a manufactured charge or an indefensible defense is a failed run, and conceding is a normal outcome. The debate never runs past two rounds — a dispute still alive is settled by executing the case, not by another round. Every claim from either side is reproduced or refuted against the real code before it is reported, and a claim whose failure scenario cannot be stated is dropped, not softened. Always end with the `CROSSCHECK REPORT`.

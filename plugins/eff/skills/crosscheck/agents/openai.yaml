@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Crosscheck"
+  short_description: "Challenger vs defender, verdict from running it"
+  default_prompt: "Use $eff:crosscheck to debate this change challenger-vs-defender and adjudicate every claim."
