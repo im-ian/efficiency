@@ -1,0 +1,4 @@
+interface:
+  display_name: "EFF Step by Step"
+  short_description: "One item per prompt, ledger of the rest"
+  default_prompt: "Use $eff:stepbystep to register this backlog as a ledger and work it one item per prompt, reporting done and remaining after each."
